@@ -1,7 +1,7 @@
 import { Pagination } from "@mui/material";
 
 import config from "config";
-import { useGetPaginatedResources } from "hooks";
+import { useGetPaginatedData } from "hooks";
 import Loading from "../Loading";
 import Error from '../Error';
 import PokemonCard from "../PokemonCard";
@@ -12,7 +12,7 @@ export type Pokemon = {
 }
 
 export default function Pokedex() {
-  const { data, loading, error, refetch, fetchMore } = useGetPaginatedResources<Pokemon>(`${config.baseUrl}/pokemon`, 9, 9);
+  const { data, loading, error, refetch, fetchMore } = useGetPaginatedData<Pokemon>(`${config.baseUrl}/pokemon`, 9, 9);
 
   const handlePageChange = (e: React.ChangeEvent<any>, page: number) => {
     fetchMore(`${config.baseUrl}/pokemon`, page * 9, 9);

@@ -11,10 +11,15 @@ export default function PokemonCard(props: PokemonCardProps) {
   const { pokemon } = props;
 
   return (
-    <div>
-      <div css={css`
-        padding: 1rem;
-      `}>
+    <div 
+      css={css`
+        background-color: white;
+        border-radius: 12px;
+        padding: 0.75rem;
+        width: 15rem;
+        height: 22.5rem;
+    `}>
+      <div >
         {/* placeholder image */}
       </div>
       {pokemon.name}
