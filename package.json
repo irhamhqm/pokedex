@@ -8,6 +8,10 @@
     "test:ci": "jest --ci"
   },
   "dependencies": {
+    "@emotion/react": "^11.10.4",
+    "@emotion/styled": "^11.10.4",
+    "@mui/material": "^5.10.9",
+    "axios": "^1.1.2",
     "next": "latest",
     "react": "^18.1.0",
     "react-dom": "^18.1.0"
