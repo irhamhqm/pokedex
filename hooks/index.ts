@@ -18,7 +18,7 @@ export interface PaginatedAPIResponse<T> {
   fetchMore: (url: string, offset: number, limit: number) => void
 }
 
-const useGetPaginatedData = <T>(url: string, offset: number, limit: number): PaginatedAPIResponse<T> => {
+const useGetPaginatedData = <T>(url: string, offset?: number, limit?: number): PaginatedAPIResponse<T> => {
   const [ data, setData ] = useState({ count: 0, next: '', previous: '', results: [] });
   const [ loading, setLoading ] = useState(true);
   const [ error, setError ] = useState(null);
@@ -30,8 +30,8 @@ const useGetPaginatedData = <T>(url: string, offset: number, limit: number): Pag
     setLoading(true);
     const controller = new AbortController();
 
-    setLasturl(`${url}/?offset=${offset}&limit=${limit}`);
-    axios.get(`${url}/?offset=${offset}&limit=${limit}`, {
+    setLasturl(`${url}?offset=${offset}&limit=${limit}`);
+    axios.get(`${url}?offset=${offset}&limit=${limit}`, {
       signal: controller.signal
     })
       .then((response) => {
@@ -67,8 +67,8 @@ const useGetPaginatedData = <T>(url: string, offset: number, limit: number): Pag
 
   const fetchMore = (url: string, offset: number, limit: number) => {
     setLoading(true);
-    setLasturl(`${url}/?offset=${offset}&limit=${limit}`);
-    axios.get(`${url}/?offset=${offset}&limit=${limit}`)
+    setLasturl(`${url}?offset=${offset}&limit=${limit}`);
+    axios.get(`${url}?offset=${offset}&limit=${limit}`)
       .then((response) => {
         setError(null);
         setData(response.data);
