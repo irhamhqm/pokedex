@@ -1,5 +1,15 @@
-export default function Error() {
+
+type ErrorProps = {
+  refetch: () => void,
+  error: any
+}
+
+export default function Error(props: ErrorProps) {
+  const { error, refetch } = props;
   return (
-    <div>Error</div>
+    <div>
+      <div>{error.message || 'Error'}</div>
+      <button onClick={refetch}>Retry</button>
+    </div>
   )
 }

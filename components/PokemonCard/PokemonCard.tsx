@@ -1,3 +1,6 @@
+
+import { css } from "@emotion/react";
+
 import { Pokemon } from "../Pokedex/Pokedex";
 
 type PokemonCardProps = {
@@ -9,6 +12,11 @@ export default function PokemonCard(props: PokemonCardProps) {
 
   return (
     <div>
+      <div css={css`
+        padding: 1rem;
+      `}>
+        {/* placeholder image */}
+      </div>
       {pokemon.name}
     </div>
   )
