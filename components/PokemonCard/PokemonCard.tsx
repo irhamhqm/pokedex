@@ -4,14 +4,17 @@ import { css } from "@emotion/react";
 import { Pokemon } from "../Pokedex/Pokedex";
 
 type PokemonCardProps = {
-  pokemon: Pokemon
+  pokemon: Pokemon,
+  handleClick: (url: string) => void,
 }
 
+
 export default function PokemonCard(props: PokemonCardProps) {
-  const { pokemon } = props;
+  const { pokemon, handleClick } = props;
 
   return (
     <div 
+      onClick={() => handleClick(pokemon.url)}
       css={css`
         background-color: white;
         border-radius: 25px;
@@ -36,6 +39,11 @@ export default function PokemonCard(props: PokemonCardProps) {
           text-transform: uppercase;
           line-height: 1.5;
           margin-top: .5rem;
+          display: -webkit-box;
+          -webkit-line-clamp: 3;
+          -webkit-box-orient: vertical;
+          height: 4.5rem;
+          overflow: hidden;
         `}
       >
         {pokemon.name}

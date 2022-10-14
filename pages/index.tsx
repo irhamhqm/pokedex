@@ -1,7 +1,8 @@
 import Head from 'next/head';
 
 import styles from '@/pages/index.module.css'
-import Pokedex from '@/components/Pokedex/Pokedex';
+import Pokedex from '@/components/Pokedex';
+import Hero from '@/components/Hero';
 
 export default function Home() {
   
@@ -20,7 +21,8 @@ export default function Home() {
         /> */}
       </Head>
       <>
-      <Pokedex />
+        <Hero />
+        <Pokedex />
       </>
     </div>
   )

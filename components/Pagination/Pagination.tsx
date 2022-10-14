@@ -22,11 +22,15 @@ export default function CustomPagination(props: PaginationProps) {
         width: 100%;
         max-width: 768px;
         margin: 1.25rem auto;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        @media (min-width: 1024px) {
+          padding: 0;
+        }
       `}>
       <FormControl>
         <InputLabel id="page-select-label">Per Page</InputLabel>
         <Select
-          autoWidth
           labelId="page-select-label"
           id="page-select"
           defaultValue="9"

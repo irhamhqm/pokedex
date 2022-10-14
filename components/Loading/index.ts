@@ -1,1 +1,1 @@
-export { default } from './Loading';
+export { Shimmer, Loading } from './Loading';
