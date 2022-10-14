@@ -1,5 +1,6 @@
 
 import { css } from "@emotion/react";
+import { Shimmer } from "../Loading";
 
 import { Pokemon } from "../Pokedex/Pokedex";
 
@@ -8,8 +9,24 @@ type PokemonCardProps = {
   handleClick: (url: string) => void,
 }
 
+export const PokemonCardLoading = () => {
+  return (
+    <div
+      css={css`
+      background-color: white;
+      border-radius: 25px;
+      padding: 1.75rem 1.25rem 1.25rem 1.25rem;
+      width: 15rem;
+      height: 22.5rem;
+      justify-self: center;
+    `}>
+      <Shimmer css={css`height: 15rem;`} />
+      <Shimmer css={css`margin-top: .5rem; width: 100%; height: 4.5rem`}/>
+    </div>
+  )
+}
 
-export default function PokemonCard(props: PokemonCardProps) {
+export function PokemonCard(props: PokemonCardProps) {
   const { pokemon, handleClick } = props;
 
   return (

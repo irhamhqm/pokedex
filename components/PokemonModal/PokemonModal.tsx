@@ -31,6 +31,45 @@ interface PokemonDetail {
   types: Array<Type>
 }
 
+const PokemonModalLoading = () => {
+  return (
+    <>
+      <Shimmer
+        css={css`
+          height: 250px;
+          @media (min-width: 768px) {
+            width: 250px;
+          }
+        `}
+      />
+      <div css={css`flex: 1;`}>
+        <Shimmer css={css`
+          margin-top: .5rem;
+          width: 100%;
+          height: 3rem;
+          @media (min-width: 768px) {
+            margin: 0;
+          }
+        `}/>
+        <Shimmer css={css`
+          margin-top: .5rem;
+          width: 100%;
+          height: 1.5rem;
+          @media (min-width: 768px) {
+          }
+        `}/>
+        <Shimmer css={css`
+          margin-top: .5rem;
+          width: 100%;
+          height: 36.5px;
+          @media (min-width: 768px) {
+          }
+        `}/>
+      </div>
+    </>
+  )
+}
+
 export default function PokemonModal(props: PokemonModalProps) {
   const { open, url, handleClose } = props;
   const { data, loading, error, refetch } = useGetData<PokemonDetail>(url, {});
@@ -58,41 +97,7 @@ export default function PokemonModal(props: PokemonModalProps) {
           }
         `}
       >
-        {loading && (
-          <>
-            <Shimmer
-              css={css`
-                height: 250px;
-                @media (min-width: 768px) {
-                  width: 250px;
-                }
-              `}
-            />
-            <div css={css`flex: 1;`}>
-              <Shimmer css={css`
-                margin-top: .5rem;
-                width: 100%;
-                height: 3rem;
-                @media (min-width: 768px) {
-                  margin: 0;
-                }
-              `}/>
-              <Shimmer css={css`
-                margin-top: .5rem;
-                width: 100%;
-                height: 1.5rem;
-                @media (min-width: 768px) {
-                }
-              `}/>
-              <Shimmer css={css`
-                margin-top: .5rem;
-                width: 100%;
-                height: 36.5px;
-                @media (min-width: 768px) {
-                }
-              `}/>
-            </div>
-          </>)}
+        {loading && (<PokemonModalLoading />)}
         {(!loading && error) && (
           <Error error={error} refetch={refetch}/>
         )}

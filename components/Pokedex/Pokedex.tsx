@@ -5,10 +5,10 @@ import config from "config";
 import { useGetPaginatedData } from "hooks";
 import { Loading } from "../Loading";
 import Error from '../Error';
-import PokemonCard from "../PokemonCard";
+import { PokemonCard, PokemonCardLoading } from "../PokemonCard";
 
 import Pagination from "../Pagination";
-import { SyntheticEvent, useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { SelectChangeEvent } from "@mui/material";
 import PokemonModal from "../PokemonModal";
 
@@ -24,6 +24,7 @@ export default function Pokedex() {
   const [ isModalOpen, setIsModalOpen ] = useState(false);
   const [ selectedPokemonUrl, setSelectedPokemonUrl ] = useState('');
   const { data, loading, error, refetch, fetchMore } = useGetPaginatedData<Pokemon>(`${config.baseUrl}/pokemon`, 0, 9);
+  const placeholderArr = useMemo(() => (Array(limit).fill(1)), [limit])
 
   useEffect(() => {
     fetchMore(`${config.baseUrl}/pokemon`, offset, limit);
@@ -112,7 +113,7 @@ export default function Pokedex() {
             }
           `}
         >
-          {loading && (<Loading />)}
+          {loading && (placeholderArr.map((value, index) => <PokemonCardLoading key={index} />))}
           {!loading && error && (<Error refetch={refetch} error={error} />)}
           {(!loading && !error) && data.results.map((value) => (
             <PokemonCard key={value.name} pokemon={value} handleClick={handleClick}/>
