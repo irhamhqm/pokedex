@@ -17,6 +17,7 @@ export type Pokemon = {
 }
 
 export default function Pokedex() {
+  const [ page, setPage] = useState(1);
   const [ offset, setOffset ] = useState(0);
   const [ limit, setLimit ] = useState(9);
   const { data, loading, error, refetch, fetchMore } = useGetPaginatedData<Pokemon>(`${config.baseUrl}/pokemon`, 0, 9);
@@ -26,10 +27,14 @@ export default function Pokedex() {
   }, [ offset, limit ])
 
   const handleLimitChange = (e: SelectChangeEvent) => {
-    setLimit(parseInt(e.target.value, 10));
+    const limitInt = parseInt(e.target.value);
+    setPage(Math.floor((offset) / limitInt) + 1);
+    setOffset((Math.round((offset) / limitInt) - 1) * limitInt);
+    setLimit(limitInt);
   }
 
   const handlePageChange = (e: React.ChangeEvent<any>, page: number) => {
+    setPage(page);
     setOffset((page - 1) * limit);
   }
 
@@ -62,14 +67,10 @@ export default function Pokedex() {
       </div>
           <Pagination
             count={data.count}
+            page={page}
             limit={limit}
             handleLimitChange={handleLimitChange}
             handlePageChange={handlePageChange}
-            css={css`
-              display: flex;
-              justify-content: center;
-              margin-top: 2rem;
-            `}
           />
       </div>
     </>

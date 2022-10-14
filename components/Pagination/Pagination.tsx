@@ -1,23 +1,27 @@
 import { css } from "@emotion/react";
-import { FormControl, InputLabel, MenuItem, Pagination, Select } from "@mui/material";
-import { useState } from "react";
+import { FormControl, InputLabel, MenuItem, Pagination, Select, SelectChangeEvent } from "@mui/material";
+import React, { useState } from "react";
 
 
 type PaginationProps = {
   count: number,
+  page: number,
   limit: number,
-  handleLimitChange: () => void,
-  handlePageChange: () => void,
+  handleLimitChange: (e: SelectChangeEvent) => void,
+  handlePageChange: (e: React.ChangeEvent<any>, page: number) => void,
 }
 
 export default function CustomPagination(props: PaginationProps) {
-  const { count, limit, handleLimitChange, handlePageChange } = props;
+  const { count, page, limit, handleLimitChange, handlePageChange } = props;
 
   return (
     <div css={css`
         display: flex;
         align-items: center;
         justify-content: space-between;
+        width: 100%;
+        max-width: 768px;
+        margin: 1.25rem auto;
       `}>
       <FormControl>
         <InputLabel id="page-select-label">Per Page</InputLabel>
@@ -35,7 +39,8 @@ export default function CustomPagination(props: PaginationProps) {
         </Select>
       </FormControl>
       <Pagination
-        count={Math.round(count / limit)}
+        count={Math.ceil(count / limit)}
+        page={page}
         variant="outlined"
         shape="rounded"
         onChange={handlePageChange}
